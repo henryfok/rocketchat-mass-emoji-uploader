@@ -30,8 +30,8 @@ for emoji in emojiFiles:
 	print(files)
 
 	data = {
-		'name': emojiFileName,
-		'aliases': emojiFileName,
+		'name': emojiFileName.lower(),
+		'aliases': emojiFileName.lower(),
 	}
 	print(data)
 
