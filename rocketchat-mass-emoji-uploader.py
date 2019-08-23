@@ -17,9 +17,18 @@ print('Files in Emoji path: ' + str(os.listdir(emojiPath)))
 
 url = config.url + '/api/v1/emoji-custom.create'
 
+validImgTypes = { '.gif', '.png', '.jpg', '.jpeg' }
+
+print('Starting uploading process...\n')
+
 for emoji in emojiFiles:
-	emojiFileName = os.path.splitext(emoji)[0]
-	print(emojiFileName)
+	emojiFileName, emojiFileExt = os.path.splitext(emoji)
+	print(emojiFileName + ' is a ' + emojiFileExt)
+	
+	if ( emojiFileExt not in validImgTypes ):
+		print(emoji + ' is not a valid image type!')
+		continue
+	
 	emojiFilePath = emojiPath + '/' + emoji
 	emojiMIME = ((mimetypes.guess_type(emoji))[0])
 	print('Adding ' + emojiFilePath + ' (' + emojiMIME +')')
@@ -42,4 +51,4 @@ for emoji in emojiFiles:
 
 	response = requests.post(url, data=data, files=files, headers=headers)
 
-	print(response.text)
+	print(response.text + '\n')
